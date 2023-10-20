@@ -1,0 +1,47 @@
+services:
+  mysqldb:
+    container_name: mysqlcontainerforapp
+    image: mysql:8.0
+    restart: unless-stopped
+    #Em producao nao usar o mysql_native_password
+    command: --default-authentication-plugin=mysql_native_password --init-file=/docker-entrypoint-initdb.d/scripts/init.sql
+    volumes:
+      - $HOME/database:/var/lib/mysql
+      - ./scripts:/docker-entrypoint-initdb.d/scripts
+    ports:
+      - 3306:3306
+    expose:
+      - 3306
+    environment:
+      MYSQL_DATABASE: api_clinica
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: letmein
+      MYSQL_ROOT_PASSWORD: letmein
+      SERVICE_TAGS: prod
+      SERICE_NAME: mysqldb
+    networks:
+      - apinetwork
+
+  apiapplication:
+    container_name: apiapplicationcontainer
+    build: .
+    image: apiapplication:v1
+    restart: unless-stopped
+    ports:
+      - 8080:8080
+    expose:
+      - 8080
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysqldb:3306/api_clinica
+      SPRING_DATASOURCE_USERNAME: 'root'
+      SPRING_DATASOURCE_PASSWORD: 'letmein'
+      SERVICE_TAGS: prod
+      SERICE_NAME: springapi
+    depends_on:
+      - mysqldb
+    networks:
+      - apinetwork
+
+networks:
+  apinetwork:
+    driver: bridge

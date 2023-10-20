@@ -1,0 +1,1 @@
+ALTER TABLE `medicos` ADD `telefone` VARCHAR(14) NOT NULL;
