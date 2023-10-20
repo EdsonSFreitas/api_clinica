@@ -15,11 +15,11 @@ import java.util.List;
  * {@code @created} 21/05/2023
  * {@code @project} api
  */
-@Entity(name = "Usuario") //Adotar mesmo nome da classe
-@Table(name = "usuarios") //Minusculo e no plural com sera no banco
-@Getter //Lombok irá gerar os getters
-@NoArgsConstructor //Lombok irá criar um construtor sem argumento
-@AllArgsConstructor //Lombok irá criar um construtor com todos os argumentos
+@Entity(name = "Usuario")
+@Table(name = "usuarios")
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
 @EqualsAndHashCode(of = "id")
 public class Usuario implements UserDetails {
@@ -38,7 +38,6 @@ public class Usuario implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority("ROLE_USER"));
-        //Se tivesse perfis de acesso eu deveria ter uma colletion com todos os perfis
     }
 
     @Override

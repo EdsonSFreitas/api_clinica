@@ -4,6 +4,7 @@ Projeto de uma API de Clínica para fins de prática aplicando boas práticas e 
 ###   Dependências utilizadas
 1. Spring boot
 2. Spring Web
+3. Spring Security 6
 3. Lombok - Diminuir a verbosidade do código
 4. Spring Data JPA
 5. MySQL Driver
@@ -70,20 +71,20 @@ Projeto de uma API de Clínica para fins de prática aplicando boas práticas e 
 
 📋 Executando o projeto
 
-* Clonando o projeto
+* Clone esse projeto
 ```sh
   git clone https://github.com/EdsonSFreitas/api_clinica.git
 ```
 
 * Altere para o diretório que contém os arquivos do docker as pastas src e scripts
 ```sh
-  cd api
+  cd api_clinica/
 ```
 
-* Inicie o build dos containers necessários para o projeto
+* Inicie o _build_ dos _containers_ necessários para o projeto
 ```sh
   docker-compose up -d --build
 ```
 
 * Após todo o processo do docker você terá acesso ao http://localhost:8080/swagger-ui/index.html para usar todos os endpoints disponíveis.
-* No endpoint /login você pode usar o login admin com senha 12345@Letmein para obter um token que deverá usar para autorizar o acesso aos demais endpoints.
+* No endpoint http://localhost:8080/login você pode usar o login _**admin**_ com senha _**12345@Letmein**_ para obter um token que deverá usar para autorizar o acesso aos demais endpoints. Credenciais para ambiente de laboratório, crie um novo para uso em produção.

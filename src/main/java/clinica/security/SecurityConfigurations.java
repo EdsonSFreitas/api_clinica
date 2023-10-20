@@ -22,14 +22,14 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
  * {@code @created} 21/05/2023
  * {@code @project} api
  */
-@Configuration // Indica para o Spring que é uma classe de configuração
-@EnableWebSecurity // Indica que vamos personalizar as configurações de segurança
+@Configuration
+@EnableWebSecurity
 public class SecurityConfigurations {
 
     @Autowired
-    private SecurityFilter securityFilter; //Instanciando para definir a ordem dos filter, por padrão é a do Spring mas precisamos alterar
+    private SecurityFilter securityFilter;
 
-    @Bean // Devolve um objeto para o Spring
+    @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
@@ -37,8 +37,8 @@ public class SecurityConfigurations {
                 .authorizeHttpRequests()
                 .requestMatchers(HttpMethod.POST, "/login").permitAll()
                 .requestMatchers(HttpMethod.GET, "/login").permitAll()
-                .anyRequest().authenticated() //Qualquer outra requisicao precisa estar logado
-                .and().addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)//Primeiro o nosso filtro, depois o do Spring
+                .anyRequest().authenticated()
+                .and().addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
         //csrf pra desativar proteção contra ataque Cross-Site Request Forgery, pq o Token já protege contra ele
     }

@@ -59,7 +59,7 @@ public class TratadorDeErros {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro: " + ex.getLocalizedMessage());
     }
 
-    //Classe criada aqui por que sera usada nessa classe
+    //Classe criada aqui por que sera usada apenas por essa classe
     private record DadosErroValidacao(String campo, String mensagem) {
 
         public DadosErroValidacao(FieldError erro) {
@@ -67,18 +67,5 @@ public class TratadorDeErros {
         }
     }
 
-    /* //Outra forma usando List.of para exibir apenas os campos que faltam e a mensagem correspondente
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity tratarErro400(MethodArgumentNotValidException ex) {
-        var erros = List.of(ex.getFieldError());
-        return ResponseEntity.badRequest().body(erros.stream().map(DadosErroValidacao::new).toList());
-    }*/
-
-    /*TODO Criar tratamento de erro para codigo 500 quando algum campo obrigatorio nao foi enviado
-    @ExceptionHandler()
-    public ResponseEntity tratarErro500(HttpClientErrorException.BadRequest ex) {
-        var erros = List.of(ex.getFieldError());
-        return ResponseEntity.badRequest().body(erros.stream().map(DadosErroValidacao::new).toList());
-    }*/
 
 }

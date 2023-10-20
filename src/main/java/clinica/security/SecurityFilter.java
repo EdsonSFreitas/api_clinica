@@ -38,21 +38,20 @@ public class SecurityFilter extends OncePerRequestFilter {
         // System.out.println(tokenJWT); //Exibindo token enviado para fins de estudos
 
         if (tokenJWT != null) {
-            var subject = tokenService.getSubject(tokenJWT); //recupera o token do cabeçalho
-            // System.out.println("Subject do Token fornecido: "+subject); // Exibe Subject do token
-            var usuario = repository.findByLogin(subject); //busca o objeto usuario do banco, se existe, entao se logou previamente
+            var subject = tokenService.getSubject(tokenJWT);
+            var usuario = repository.findByLogin(subject);
             var authentication = new UsernamePasswordAuthenticationToken(usuario, null, usuario.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authentication);
 
         }
 
-        filterChain.doFilter(request, response); //Encaminha o request e o response para o próximo filter
+        filterChain.doFilter(request, response);
     }
 
     private String recuperarToken(HttpServletRequest request) {
-        var authorizationHeader = request.getHeader("Authorization"); //Recupera o valor de Authorization no cabeçalho da requisição
+        var authorizationHeader = request.getHeader("Authorization");
         if (authorizationHeader != null) {
-            return authorizationHeader.replace("Bearer ", ""); //Apaga PREFIX "Bearer "
+            return authorizationHeader.replace("Bearer ", "");
         }
         return null;
     }

@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
  * {@code @created} 21/05/2023
  * {@code @project} api
  */
-@Service //Por ser de um serviço de autenticação
+@Service
 public class AutenticacaoService implements UserDetailsService {
 
     @Autowired

@@ -32,13 +32,12 @@ public class AutenticacaoController {
     private AuthenticationManager manager;
 
     @Autowired
-    private TokenService tokenService; //TokenService do projeto, não do Spring que tem mesmo nome
+    private TokenService tokenService;
 
     @PostMapping
     public ResponseEntity efetuarLogin(@RequestBody @Valid DadosAutenticacao dados) {
         var authenticationToken = new UsernamePasswordAuthenticationToken(dados.login(), dados.senha());
-        var authentication = manager.authenticate(authenticationToken); //Dispara o processo de autenticacao
-        //return ResponseEntity.ok(authenticationToken.gerarToken((Usuario) authentication.getPrincipal())); // Dessse modo retorna o token gerado sem um DTO
+        var authentication = manager.authenticate(authenticationToken);
 
         var tokenJWT = tokenService.gerarToken((Usuario) authentication.getPrincipal());
 

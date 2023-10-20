@@ -26,9 +26,9 @@ public record DadosCadastroMedico(
         @NotBlank(message = "{crm.obrigatorio}")
         @Pattern(regexp = "\\d{4,6}", message = "{crm.invalido}") //Valida se campo tem apenas numeros, minimo 4 e maximo 6 numeros e usa ValidationMessages.properties
         String crm,
-        @NotNull(message = "{especialidade.obrigatoria}") //Como esse campo não é String não posso usar @NotBlank
+        @NotNull(message = "{especialidade.obrigatoria}")
         Especialidade especialidade,
-        @NotNull(message = "{endereco.obrigatorio}") //Como esse campo não é String não posso usar @NotBlank
+        @NotNull(message = "{endereco.obrigatorio}")
         @Valid //Devido ao DadosEndereco ser outro record DTO, valide também os objeto que estão dentro dele
         DadosEndereco endereco
 

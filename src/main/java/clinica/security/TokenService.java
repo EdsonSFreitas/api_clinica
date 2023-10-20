@@ -27,9 +27,9 @@ public class TokenService {
         try {
             var algoritmo = Algorithm.HMAC256(secret);
             return JWT.create()
-                    .withIssuer("API Clinica") //Identificacao da aplicacao
-                    .withSubject(usuario.getLogin()) //Guardando nome do usuario no token
-                    .withClaim("id", usuario.getId()) //Guardando id do usuario no token
+                    .withIssuer("API Clinica")
+                    .withSubject(usuario.getLogin())
+                    .withClaim("id", usuario.getId())
                     .withExpiresAt(dataExpiracao())
                     .sign(algoritmo);
         } catch (JWTCreationException exception) {
