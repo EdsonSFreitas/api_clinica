@@ -2,7 +2,7 @@ server.port: 8080
 
 logging:
   level:
-    root: WARN
+    root: INFO
 
 spring:
   output:
@@ -19,16 +19,11 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://mysqlcontainerforapp:3306/api_clinica?useTimezone=true&serverTimezone=UTC&useLegacyDate
-    username: root
+    username: admin
     password: letmein
   jpa:
     show-sql: true
     #hibernate: # Optei por usar o FlyWay para versionamento do banco
-      #ddl-auto: none
-      #ddl-auto: update # Atualiza o schema do banco automaticamente para que fique igual as entidades, inclusive apaga o que for necessário
-      #ddl-auto: create # Cria o schema do banco automaticamente, se ja existir sera excluido e recriado
-      #ddl-auto: create-drop # Semelhante ao create mas o schema é removido toda vez que encerrar a aplicação
-      #ddl-auto: validate # Apenas valida o schema do banco e lancará exceções se não estiver de acordo com as entidades mas não altera nada
     properties:
       hibernate.format_sql: true
   data:
@@ -42,4 +37,19 @@ spring:
 api:
   security:
     token:
-      secret: ${JWT_SECRET:12345678}
+      secret: ${JWT_SECRET:SpringTokenizerRocks}
+
+
+module-name: API Clinica Medica em Container Docker
+api-version: 0.9.8
+api-description: API Clinica Medica
+api-contact-name: Edson Freitas
+api-contact-url: http://github.com/edsonsfreitas
+api-contact-email: edson.s.freitas@gmail.com
+
+spring-doc:
+  api-docs:
+    resolve-schema-properties: true
+    swagger-ui:
+      csrf:
+        enabled=true

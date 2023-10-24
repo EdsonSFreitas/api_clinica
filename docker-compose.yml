@@ -3,6 +3,11 @@ services:
     container_name: mysqlcontainerforapp
     image: mysql:8.0
     restart: unless-stopped
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "-u", "root", "-p", "letmein", "ping" ]
+      interval: 10s
+      timeout: 5s
+      retries: 3
     #Em producao nao usar o mysql_native_password
     command: --default-authentication-plugin=mysql_native_password --init-file=/docker-entrypoint-initdb.d/scripts/init.sql
     volumes:
@@ -32,8 +37,10 @@ services:
     expose:
       - 8080
     environment:
+        # Define o perfil de execução no Spring Boot
+      SPRING_PROFILES_ACTIVE: prod
       SPRING_DATASOURCE_URL: jdbc:mysql://mysqldb:3306/api_clinica
-      SPRING_DATASOURCE_USERNAME: 'root'
+      SPRING_DATASOURCE_USERNAME: 'admin'
       SPRING_DATASOURCE_PASSWORD: 'letmein'
       SERVICE_TAGS: prod
       SERICE_NAME: springapi

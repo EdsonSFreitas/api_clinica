@@ -5,15 +5,21 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.Optional;
+
 /**
  * Repository do Usuario, cada entidade deve ter seu proprio Repository
+ *
  * @author Edson da Silva Freitas
  * {@code @created} 21/05/2023
  * {@code @project} api
  */
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
     UserDetails findByLogin(String login);
+
     Page<Usuario> findAll(Pageable paginacao);
 
     boolean existsByLogin(String login);
+
+    //Optional<UsuarioStatusRetornoDTO> update(Long id, UsuarioStatusUpdateDTO updateStatus);
 }

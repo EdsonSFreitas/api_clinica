@@ -1,3 +1,8 @@
-ALTER TABLE `medicos` ADD `ativo` tinyint;
-update medicos set ativo = 1;
-alter table medicos modify ativo tinyint not null
+-- Adicione a coluna como NULL
+ALTER TABLE medicos ADD ativo tinyint NOT NULL;
+
+-- Atualize os valores existentes para a coluna
+UPDATE medicos SET ativo = 1;
+
+-- Altere a coluna para NOT NULL
+-- ALTER TABLE medicos SET ativo tinyint NOT NULL;

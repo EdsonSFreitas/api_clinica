@@ -1,18 +1,22 @@
 ### Projeto API Clinica Medica com Spring Framework
-Projeto de uma API de Clínica para fins de prática aplicando boas práticas e autenticação/autorização via token JWT.
+* Projeto de uma API de Clínica para fins de prática aplicando boas práticas e autenticação/autorização via token JWT;
+* Usuário com controle de acesso baseado em roles, com bloqueio de acesso por data de expiração para a credencial e para a conta;
+* Exceções do Spring Security sendo capturadas via HandlerExceptionResolver;
 
 ###   Dependências utilizadas
-1. Spring boot
+1. Spring boot 3
 2. Spring Web
-3. Spring Security 6
-3. Lombok - Diminuir a verbosidade do código
-4. Spring Data JPA
-5. MySQL Driver
-6. Flyway Migration - Controle de versão do banco de dados
-7. Validation - Validações diversas
-8. Spring OpenAPI UI - Swagger para documentação da API
-9. Spring Context - Fornece contexto de execução da aplicação
-10. Auth0 - Autenticação e Autorização via JWT
+3. Spring Security 6 - Usei técnicas mais recentes no projeto
+4. Lombok - Diminuir a verbosidade do código
+5. Spring Data JPA
+6. MySQL Driver para acesso ao banco de dados no ambiente de prod
+7. Flyway Migration - Controle de versão do banco de dados
+8. Validation - Validações diversas
+9. Spring OpenAPI UI - Swagger para documentação da API
+10. Spring Context - Fornece contexto de execução da aplicação
+11. Auth0 - Autenticação e Autorização via JWT
+12. ModelMapper - Mapeamento entre Model e DTO
+13. Database H2 para ambiente de dev
 
 ### Organização dos módulos:
 * Package domain - Com pacotes separados por funcionalidade;
@@ -81,9 +85,16 @@ Projeto de uma API de Clínica para fins de prática aplicando boas práticas e 
   cd api_clinica/
 ```
 
-* Inicie o _build_ dos _containers_ necessários para o projeto
+* Se preferir executar o ambiente de desenvolvimento com database H2 sem containers:
+```bash
+  export SPRING_PROFILES_ACTIVE=dev && mvn spring-boot:run
+```
+O usuario inicial é **devadmin** com senha 123456
+
+* Se preferir executar o ambiente de produção com containers, inicie o _build_ dos _containers_ necessários para o projeto (Que usará Maven e MySQL com Flyway). 
+* O parâmetro **--renew-anon-volumes** força a recriação dos volumes anônimos.
 ```sh
-  docker-compose up -d --build
+  docker-compose up -d --build --renew-anon-volumes
 ```
 
 * Após todo o processo do docker você terá acesso ao http://localhost:8080/swagger-ui/index.html para usar todos os endpoints disponíveis.

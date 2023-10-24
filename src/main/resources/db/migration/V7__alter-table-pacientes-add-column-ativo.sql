@@ -1,3 +1,2 @@
-ALTER TABLE `pacientes` ADD `ativo` tinyint;
+ALTER TABLE `pacientes` ADD `ativo` tinyint NOT NULL;
 update pacientes set ativo = 1;
-alter table pacientes modify ativo tinyint not null
